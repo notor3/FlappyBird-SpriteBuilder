@@ -13,8 +13,16 @@
     CCNode *_ground1;
     CCNode *_ground2;
     NSArray *_grounds;
-    
-    NSTimeInterval _sinceTouch;
+
+	CCNode *_cloud1;
+	CCNode *_cloud2;
+	NSArray *_clouds;
+
+	CCNode *_bush1;
+	CCNode *_bush2;
+	NSArray *_bushes;
+
+	NSTimeInterval _sinceTouch;
     
     NSMutableArray *_obstacles;
     
@@ -32,7 +40,9 @@
     self.userInteractionEnabled = TRUE;
     
     _grounds = @[_ground1, _ground2];
-    
+    _clouds = @[_cloud1, _cloud2];
+    _bushes = @[_bush1, _bush2];
+
     for (CCNode *ground in _grounds) {
         // set collision txpe
         ground.physicsBody.collisionType = @"level";
@@ -128,7 +138,7 @@
     if ((_sinceTouch > 0.5f)) {
         [character.physicsBody applyAngularImpulse:-40000.f*delta];
     }
-    
+
     physicsNode.position = ccp(physicsNode.position.x - (character.physicsBody.velocity.x * delta), physicsNode.position.y);
     
     // loop the ground
@@ -143,8 +153,30 @@
             ground.position = ccp(ground.position.x + 2 * ground.contentSize.width, ground.position.y);
         }
     }
-    
-    NSMutableArray *offScreenObstacles = nil;
+
+	// move and loop the bushes
+	for (CCNode *bush in _bushes) {
+		// move the bush
+		bush.position = ccp(bush.position.x - (character.physicsBody.velocity.x * delta), bush.position.y);
+
+		// if selected bush is offscreen move it to the right
+		if (bush.position.x <= (-bush.contentSize.width)) {
+			bush.position = ccp(bush.position.x + 2*bush.contentSize.width, bush.position.y);
+		}
+	}
+
+	// move and loop the clouds
+	for (CCNode *cloud in _clouds) {
+		// move the cloud
+		cloud.position = ccp(cloud.position.x - (character.physicsBody.velocity.x * delta), cloud.position.y);
+
+		// if selected cloud is offscreen move it to the right
+		if (cloud.position.x <= (-cloud.contentSize.width)) {
+			cloud.position = ccp(cloud.position.x + 2*cloud.contentSize.width, cloud.position.y);
+		}
+	}
+
+	NSMutableArray *offScreenObstacles = nil;
     
     for (CCNode *obstacle in _obstacles) {
         CGPoint obstacleWorldPosition = [physicsNode convertToWorldSpace:obstacle.position];
