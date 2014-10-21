@@ -271,7 +271,7 @@
 				ORGANIZATIONNAME = Apportable;
 				TargetAttributes = {
 					B77F1B2D17B978D7009739AE = {
-						DevelopmentTeam = SBVP8ED765;
+						DevelopmentTeam = K36A8C7X5X;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 0;
@@ -351,7 +351,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "osascript -e 'tell application \"System Events\"' -e 'set ProcessList to name of every process' -e 'if \"SpriteBuilder\" is in ProcessList then' -e 'tell application \"SpriteBuilder\" to publish' -e 'end if' -e 'end tell'\n\nif ! [ -n \"${MGWU_SKIP_PUSH}\" ]; then\ngit add . --all\ngit commit -m \"Automatically Committed for MakeGamesWithUs\"\ngit push origin master || true\nfi";
+			shellScript = "osascript -e 'tell application \"System Events\"' -e 'set ProcessList to name of every process' -e 'if \"SpriteBuilder\" is in ProcessList then' -e 'tell application \"SpriteBuilder\" to publish' -e 'end if' -e 'end tell'\n\n#if ! [ -n \"${MGWU_SKIP_PUSH}\" ]; then\n#git add . --all\n#git commit -m \"Automatically Committed for MakeGamesWithUs\"\n#git push origin master || true\n#fi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -469,6 +469,7 @@
 				);
 				PRODUCT_NAME = FlappyBird;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -500,6 +501,7 @@
 				);
 				PRODUCT_NAME = FlappyBird;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
